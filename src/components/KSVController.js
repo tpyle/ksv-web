@@ -1,6 +1,8 @@
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import { Save2Fill } from 'react-bootstrap-icons';
+import Button from 'react-bootstrap/Button';
+import { Route, Routes } from 'react-router-dom';
 
+import ItemListController from './ItemListController';
 
 /**
  * @typedef {Object} KSVControllerProps
@@ -13,15 +15,14 @@ import Tabs from 'react-bootstrap/Tabs';
  */
 export default function KSVController({ ksv, saveKSV }) {
     return (
-        <Tabs
-            defaultActiveKey="items"
-        >
-            <Tab eventKey="items" title="Item">
-
-            </Tab>
-            <Tab eventKey="templates" title ="Templates">
-
-            </Tab>
-        </Tabs>
+        <>
+            <Button onClick={() => { saveKSV() }} variant="success">
+                <Save2Fill />
+            </Button>
+            <Routes>
+                <Route exact path="/" element={<ItemListController ksvObject={ksv} />} />
+                <Route path="/templates" element={<span>Hello</span>} />
+            </Routes>
+        </>
     )
 }

@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 
 import KSVObject from 'ksv-lib/KSVObject';
+
+import KSVController from './KSVController';
 import DecryptLoginForm from './DecryptLoginForm';
 
 
-export default function EncryptionController({ encryptedData, setEncryptedData }) {
+export default function EncryptionController({ encryptedData, setEncryptedData, setAuthenticated }) {
     const [ksv, setKSV] = useState(null);
     const [password, setPassword] = useState(null);
     const [failedEncrypt, setFailedEncrypt] = useState(null);
@@ -14,25 +16,27 @@ export default function EncryptionController({ encryptedData, setEncryptedData }
             if (encryptedData) {
                 try {
                     setKSV(KSVObject.decrypt(encryptedData, password));
+                    setAuthenticated(true);
                 } catch (e) {
                     setFailedEncrypt(e);
                 }
             } else {
                 setKSV(KSVObject.default());
+                setAuthenticated(true);
             }
         }
         if (password !== null) {
             decrypt();
         }
-    }, [password, encryptedData]);
+    }, [password, encryptedData, setAuthenticated]);
 
     async function encrypt() {
-        ksv.encrypt();
+        setEncryptedData(ksv.encrypt(password));
     }
 
     if (ksv !== null) {
         return (
-            "We are authenticated to our object"
+            <KSVController ksv={ksv} saveKSV={encrypt} />
         );
     } else {
         return (
