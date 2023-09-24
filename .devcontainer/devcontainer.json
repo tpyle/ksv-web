@@ -1,0 +1,13 @@
+{
+    "customizations": {
+      "codespaces": {
+        "repositories": {
+          "tpyle/ksv-lib": {
+            "permissions": {
+              "issues": "write"
+            }
+          }
+        }
+      }
+    }
+  }
