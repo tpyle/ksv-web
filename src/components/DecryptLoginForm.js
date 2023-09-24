@@ -30,7 +30,7 @@ export default function DecryptLoginForm({
                         Your master password is used to encrypt and decrypt your data. It is not stored anywhere.
                     </Form.Text>
                 </Form.Group>
-                {error ? <Alert variant='error'>{error}</Alert> : null}
+                {error ? <Alert variant='danger'>{String(error)}</Alert> : null}
                 <Button variant="success" type="submit">
                     <UnlockFill className={classNames('ml-2')} />
                     <span>Decrypt</span>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
 
-import './App.css';
+// import './App.css';
 import Header from './components/Header';
 import DataController from './components/DataController';
 

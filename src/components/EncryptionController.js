@@ -15,10 +15,11 @@ export default function EncryptionController({ encryptedData, setEncryptedData, 
         async function decrypt() {
             if (encryptedData) {
                 try {
-                    setKSV(KSVObject.decrypt(encryptedData, password));
+                    setKSV(await KSVObject.decrypt(encryptedData, password));
                     setAuthenticated(true);
                 } catch (e) {
-                    setFailedEncrypt(e);
+                    console.error(e);
+                    setFailedEncrypt(new Error(`Failed to decrypt data. Is your password correct?`));
                 }
             } else {
                 setKSV(KSVObject.default());
@@ -31,7 +32,7 @@ export default function EncryptionController({ encryptedData, setEncryptedData, 
     }, [password, encryptedData, setAuthenticated]);
 
     async function encrypt() {
-        setEncryptedData(ksv.encrypt(password));
+        setEncryptedData(await ksv.encrypt(password));
     }
 
     if (ksv !== null) {

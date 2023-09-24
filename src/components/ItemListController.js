@@ -6,6 +6,7 @@ import classNames from "classnames";
 
 import ItemList from "./ItemList";
 import SearchBox from "./SearchBox";
+import KeyCharacterClassForm from "./KeyCharacterClassForm";
 
 
 /**
@@ -29,7 +30,7 @@ export default function ItemListController({ ksvObject }) {
             )} md={
                 activeItem || isCreating ? 4 : 12
             }>
-                <SearchBox currentVal={searchVal} setSearchVal={setSearchVal} onCreate={setIsCreating} />
+                <SearchBox currentVal={searchVal} setSearchVal={setSearchVal} onCreate={() => setIsCreating(true)} />
                 <ItemList items={ksvObject.itemEntries} filter={searchVal} />
             </Col>
             {activeItem && !isCreating ? (
@@ -38,6 +39,7 @@ export default function ItemListController({ ksvObject }) {
             ) : null}
             {isCreating ? (
                 <Col xs="8">
+                    <KeyCharacterClassForm />
                 </Col>
             ) : null}
         </Row>
